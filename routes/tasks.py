@@ -1,0 +1,19 @@
+from fastapi import APIRouter
+from celery.result import AsyncResult
+
+from celery_app import celery_app
+
+router =  APIRouter(prefix="/tasks")
+
+
+@router.get("/{task_id}")
+def get_task_status(task_id: str):
+    result = AsyncResult(task_id, app=celery_app)
+    if result.ready():
+        print(1)
+    
+    return {
+        "task_id": task_id,
+        "status": result.status,
+        "result": result.result
+    }
