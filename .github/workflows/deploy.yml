@@ -34,8 +34,8 @@ jobs:
 
       - name: Install Railway CLI
         run: npm install -g @railway/cli
-        
+
       - name: Deploy to Railway
-        run: railway up --service=try_jwt_auth
+        run: railway up --service=kt-py
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
